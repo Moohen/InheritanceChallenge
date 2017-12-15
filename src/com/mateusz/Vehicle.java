@@ -16,10 +16,13 @@ public class Vehicle {
     private int bearingCapacity;
     private int numberOfSeats;
     private int horsepower;
+    private int currentVelocity;
+    private int currentDirection;
+
 
     public Vehicle(String name, String typeOfEngine, String typeOfPower, String typeOfLoading, String countryOfOrigin,
                    String yearOfProduction, String typeOfControl, int height, int width, int thickness, int weight,
-                   int bearingCapacity, int numberOfSeats, int horsepower) {
+                   int bearingCapacity, int numberOfSeats, int horsepower, int currentVelocity, int currentDirection) {
         this.name = name;
         this.typeOfEngine = typeOfEngine;
         this.typeOfPower = typeOfPower;
@@ -34,6 +37,23 @@ public class Vehicle {
         this.bearingCapacity = bearingCapacity;
         this.numberOfSeats = numberOfSeats;
         this.horsepower = horsepower;
+        this.currentVelocity = 0;
+        this.currentDirection = 0;
+    }
+
+    public void steer(int direction) {
+        this.currentDirection += direction;
+        System.out.println("vehicle.steer(): Steering at " + currentDirection + " degrees.");
+    }
+
+    public void move(int velocity, int direction) {
+        currentVelocity = velocity;
+        currentDirection = direction;
+        System.out.println("Vehicle.move() Moving at " + currentVelocity + " in direction " + currentDirection);
+    }
+
+    public void stop() {
+        this.currentVelocity = 0;
     }
 
     public String getName() {
@@ -90,5 +110,13 @@ public class Vehicle {
 
     public int getHorsepower() {
         return horsepower;
+    }
+
+    public int getCurrentVelocity() {
+        return currentVelocity;
+    }
+
+    public int getCurrentDirection() {
+        return currentDirection;
     }
 }

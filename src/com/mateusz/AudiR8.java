@@ -5,49 +5,50 @@ public class AudiR8 extends Car {
     private int bodyType;
     private int windows;
     private int tankCapacity;
+    private int roadServiceMonths;
     private String model;
     private String equipment;
     private String typeOfGearbox;
 
-    public AudiR8(String name, String typeOfEngine, String typeOfPower, String typeOfLoading, String countryOfOrigin,
-                  String yearOfProduction, String typeOfControl, int height, int width, int thickness, int weight,
-                  int bearingCapacity, int numberOfSeats, int horsepower, int wheels, int displacement, int maxSpeed,
-                  double acceleration, String brand, String typeOfDrive, String modelOfEngine, int bodyType,
-                  int windows, int tankCapacity, String model, String equipment, String typeOfGearbox) {
-        super(name, typeOfEngine, typeOfPower, typeOfLoading, countryOfOrigin, yearOfProduction, typeOfControl, height,
-                width, thickness, weight, bearingCapacity, numberOfSeats, horsepower, wheels, displacement, maxSpeed,
-                acceleration, brand, typeOfDrive, modelOfEngine);
+    public AudiR8(int bodyType, int windows, int tankCapacity, int roadServiceMonths, String model, String equipment,
+                  String typeOfGearbox) {
+        super("AudiR8", "motor engine", "gas", "car",
+                "Germany", "2006", "steering wheel", 1249,
+                4431, 1904, 1454, 1000, 2, 430,
+                0, 0, 4, 4163, 301, 6, 4.6,
+                "Audi", "Quattro", "Audi FSI V8 32V", true);
         this.bodyType = bodyType;
         this.windows = windows;
         this.tankCapacity = tankCapacity;
+        this.roadServiceMonths = roadServiceMonths;
         this.model = model;
         this.equipment = equipment;
         this.typeOfGearbox = typeOfGearbox;
     }
 
-    @Override
-    public void handSteering(int degrees, String direction) {
-        super.handSteering(degrees, direction);
-    }
+    public void accelerate(int rate) {
+        int newVelocity = getCurrentVelocity() + rate;
 
-    @Override
-    public void increasingGear(int gear) {
-        super.increasingGear(gear);
-    }
+        if(newVelocity == 0) {
+            stop();
+            changeGear(1);
+        } else if (newVelocity > 0 && newVelocity <= 10) {
+            changeGear(1);
+        } else if (newVelocity > 10 && newVelocity <= 20) {
+            changeGear(2);
+        } else if (newVelocity > 20 && newVelocity <= 30) {
+            changeGear(3);
+        } else if (newVelocity > 30 && newVelocity <= 40) {
+            changeGear(4);
+        } else if (newVelocity > 40 && newVelocity <= 50) {
+            changeGear(5);
+        } else {
+            changeGear(6);
+        }
 
-    @Override
-    public void decreasingGear(int gear) {
-        super.decreasingGear(gear);
-    }
-
-    @Override
-    public void increasingSpeed(int speed) {
-        super.increasingSpeed(speed);
-    }
-
-    @Override
-    public void decreasingSpeed(int speed) {
-        super.decreasingSpeed(speed);
+        if(newVelocity > 0) {
+            changeVelocity(newVelocity, getCurrentDirection());
+        }
     }
 
     public int getBodyType() {
